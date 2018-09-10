@@ -3,6 +3,7 @@ package org.ajc.project.child.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +14,10 @@ import javax.persistence.OneToMany;
 public class Contact {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "contact")
+	@OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
 	private List<Child> children = new ArrayList<>();
 
 	private String fname;
@@ -24,6 +25,10 @@ public class Contact {
 	private String email;
 	private String contactType;
 	private int age;
+
+	public Contact() {
+		super();
+	}
 
 	/**
 	 * @param id
@@ -33,9 +38,8 @@ public class Contact {
 	 * @param contactType
 	 * @param age
 	 */
-	public Contact(Long id, String fname, String lname, String email, String contactType, int age) {
+	public Contact(String fname, String lname, String email, String contactType, int age) {
 		super();
-		this.id = id;
 		this.fname = fname;
 		this.lname = lname;
 		this.email = email;
@@ -98,7 +102,7 @@ public class Contact {
 	public void setChildren(List<Child> children) {
 		this.children = children;
 	}
-	
+
 	public void addChild(Child child) {
 		child.setContact(this);
 		this.children.add(child);

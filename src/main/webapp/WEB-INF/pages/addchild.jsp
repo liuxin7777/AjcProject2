@@ -11,9 +11,12 @@
 
 	<c:url var="addChildtUrl" value="/addchild" />
 	<form action="${addChildtUrl}" method="post">
-		<input type="number" name="id" required /> 
-		<input type="text" name="fname" required /> 
-		<input type="number" name="age" required /> 
+		<label for="id">Contact ID :</label>
+		<input type="number" name="id" id="id" required /><br>
+		<label for="fname">Child's family name :</label> 
+		<input type="text" name="fname" id="fname" required />
+		<label for="age">Child's age :</label> 
+		<input type="number" name="age" id="age" required /> 
 		<input type="submit" value="Submit" class="btn btn-primary" />
 	</form>
 

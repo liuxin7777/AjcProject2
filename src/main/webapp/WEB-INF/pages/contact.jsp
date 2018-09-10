@@ -11,7 +11,8 @@
 
 	<c:url var="inputContactUrl" value="/contact" />
 	<form action="${inputContactUrl}" method="post">
-		<input type="number" name="id" required /> 
+		<label for="id">Contact ID :</label>
+		<input type="number" name="id" id="id" required /> 
 		<input type="submit" value="Submit" class="btn btn-primary" />
 	</form>
 

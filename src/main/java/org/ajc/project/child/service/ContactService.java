@@ -3,6 +3,7 @@ package org.ajc.project.child.service;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 import org.ajc.project.child.dao.ContactRepository;
 import org.ajc.project.child.model.Child;
@@ -10,6 +11,7 @@ import org.ajc.project.child.model.Contact;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class ContactService {
 
 	private final ContactRepository contactRepository;
@@ -24,12 +26,15 @@ public class ContactService {
 	}
 
 	public Contact getContactById(final Long id) {
-		return contactRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+		Contact contact = contactRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+		contact.getChildren().size();
+		return contact;
 	}
 
 	public Contact addNewChild(final Long id, final Child child) {
 		Contact contact = contactRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 		contact.addChild(child);
-		return contactRepository.save(contact);
+		contact.getChildren().size();
+		return contact;
 	}
 }

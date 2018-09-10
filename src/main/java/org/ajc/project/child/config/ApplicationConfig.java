@@ -28,7 +28,7 @@ public class ApplicationConfig {
 	public DataSource dataSource() {		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:mem:~/test");
+		dataSource.setUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");		
 		return dataSource;
@@ -51,7 +51,7 @@ public class ApplicationConfig {
 		//Hibernate Implementation of JPA is used 
 		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		
-		//JPA vendor adapter will set SQL syntax to MYSQL
+		//JPA vendor adapter will set SQL syntax to H2
 		jpaVendorAdapter.setDatabase(Database.H2);
 		
 		//Database tables-setGenerateDdl(true);
@@ -102,7 +102,7 @@ public class ApplicationConfig {
 		
 		//Custom properties can be set using Properties
 		Properties jpaProperties = new Properties();
-		jpaProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+		jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
 		
 		entityManagerFactory.setJpaProperties(jpaProperties);
 		
